@@ -46,7 +46,11 @@ const userSchema = new mongoose.Schema({
     phoneNumber:{
         type:Number,
         require: true,
-    } 
+    },
+    password:{
+        type:String,
+        require: true,
+    }
 },{ timestamps: true });
 const User = mongoose.model("User", userSchema);
 export default User;

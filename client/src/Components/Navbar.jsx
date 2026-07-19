@@ -507,8 +507,12 @@ export default function Navbar() {
             {/* Mobile Auth/Profile logic */}
             {!useralldata ? (
               <div className="nb-mobile-btns">
-                <Link to="/login" style={{ flex: 1 }}><button className="nb-btn-login" style={{ width: "100%" }}>Log In</button></Link>
-                <Link to="/signup" style={{ flex: 1 }}><button className="nb-btn-signup" style={{ width: "100%" }}>Sign Up</button></Link>
+                <Link to="/login"  onClick={()=>{
+                   setMenuOpen(false);
+                }} style={{ flex: 1 }}><button className="nb-btn-login" style={{ width: "100%" }}>Log In</button></Link>
+                <Link to="/signup" onClick={()=>{
+                   setMenuOpen(false);
+                }} style={{ flex: 1 }}><button className="nb-btn-signup" style={{ width: "100%" }}>Sign Up</button></Link>
               </div>
             ) : (
               <div style={{ marginTop: "16px", borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "16px" }}>
@@ -520,13 +524,34 @@ export default function Navbar() {
                   </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <Link to="/accountsettings" className="nb-profile-item" style={{ padding: "8px 0" }}>
+                  <Link to="/accountsettings"  onClick={()=>{
+                     setMenuOpen(false);
+                     window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+                    });
+                  }}  className="nb-profile-item" style={{ padding: "8px 0" }}>
                     <Settings size={18} /> Account settings
                   </Link>
-                  <Link to="/post" className="nb-profile-item" style={{ padding: "8px 0" }}>
+                  <Link to="/post" onClick={()=>{
+                     setMenuOpen(false);
+                     window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+                    });
+                  }}  className="nb-profile-item" style={{ padding: "8px 0" }}>
                     <Globe size={18} />Your Post
                   </Link>
-                  <Link to="/application" className="nb-profile-item" style={{ padding: "8px 0" }}>
+                  <Link to="/application"  onClick={()=>{
+                     setMenuOpen(false);
+                     window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+                    });
+                  }} className="nb-profile-item" style={{ padding: "8px 0" }}>
                     <Pencil size={18} /> Your Application
                   </Link>
                   <button className="nb-profile-item logout" onClick={handlelogout} style={{ padding: "8px 0" }}>

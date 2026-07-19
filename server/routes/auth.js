@@ -65,6 +65,8 @@ authRouter.post("/register", upload.single('profilepic'), async (req, res) => {
     try {
         const { fullname, password, email, collagename, bio, skill, githublink, linkedinlink, protfolio ,studentCode ,section , phoneNumber} = JSON.parse(req.body.userinfo);
         console.log(protfolio)
+        console.log(password)
+        
         const IsFristUser = User.findOne({ email: email });
         if (!IsFristUser) {
             return res.status(400).json({ "message": "Already have an account.", status: false })
@@ -80,6 +82,7 @@ authRouter.post("/register", upload.single('profilepic'), async (req, res) => {
         }
         const slat = await bcrypt.genSalt(12);
         const haspass = await bcrypt.hash(password, slat);
+        console.log(haspass)
         const newuser = new User({
             fullname,
             email,

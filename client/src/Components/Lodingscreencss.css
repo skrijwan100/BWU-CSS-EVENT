@@ -38,8 +38,8 @@
 .loadermain {
   position: fixed;
   width: 220px;
-  height:220px;
-  bottom: 308px;
+  height:218px;
+
   border-radius: 50%;
   border: 3px solid #FFC300;
   border-top-color: transparent;
