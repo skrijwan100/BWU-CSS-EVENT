@@ -12,117 +12,278 @@ const sendRejectionEmail = async (sendtoemail, eventName) => {
 
     const rejectionEmailTemplateHTML = (eventName) => `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DevForge Application Update</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body{
-    margin:0;
-    padding:0;
-    background:#0d0d0d;
-    font-family: Arial, Helvetica, sans-serif;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-.container{
-    max-width:600px;
-    margin:auto;
-    background:#111;
-    border-radius:10px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,0.07);
+body{
+background:#0b0b0b;
+font-family:Arial,Helvetica,sans-serif;
+padding:30px 15px;
+color:#ffffff;
+}
+
+.wrapper{
+max-width:650px;
+margin:auto;
+}
+
+.card{
+background:#151515;
+border:1px solid #2b2b2b;
+border-radius:18px;
+overflow:hidden;
 }
 
 .header{
-    background: linear-gradient(90deg,#FF7A00,#ff8f1f);
-    padding:25px;
-    text-align:center;
-    color:white;
-    font-size:26px;
-    font-weight:bold;
-    letter-spacing:1px;
+background:linear-gradient(135deg,#ff7a00,#ffb000);
+padding:35px;
+text-align:center;
 }
 
-.content{
-    padding:40px 30px;
-    color:#eaeaea;
-    text-align:center;
-    line-height: 1.6;
+.logo{
+font-size:34px;
+font-weight:800;
+letter-spacing:2px;
+color:#fff;
 }
 
-.content h2{
-    margin-top:0;
-    font-size:24px;
-    color: #ffffff;
+.tagline{
+margin-top:8px;
+font-size:14px;
+color:rgba(255,255,255,.9);
 }
 
-.status-box{
-    display:inline-block;
-    margin:25px 0;
-    padding:15px 30px;
-    font-size:20px;
-    font-weight:bold;
-    letter-spacing:4px;
-    background:rgba(255,255,255,0.05);
-    border: 1px solid #555555;
-    border-radius:8px;
-    color:#aaaaaa;
+.body{
+padding:45px 35px;
+text-align:center;
 }
 
-.info{
-    font-size:15px;
-    color:#bbbbbb;
-    margin-top: 10px;
+.icon{
+width:90px;
+height:90px;
+margin:auto;
+line-height:90px;
+font-size:46px;
+background:rgba(255,255,255,.06);
+border:2px solid #555;
+border-radius:50%;
+}
+
+h1{
+margin-top:25px;
+font-size:30px;
+color:#fff;
+}
+
+.subtitle{
+margin-top:18px;
+font-size:17px;
+line-height:1.8;
+color:#d3d3d3;
+}
+
+.event-box{
+margin:35px 0;
+padding:22px;
+background:#1f1f1f;
+border:1px solid #333;
+border-radius:14px;
+}
+
+.event-title{
+font-size:13px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#999;
+}
+
+.event-name{
+margin-top:10px;
+font-size:28px;
+font-weight:bold;
+color:#ffb000;
+}
+
+.status{
+display:inline-block;
+margin-top:30px;
+padding:14px 38px;
+border-radius:50px;
+background:#2d2d2d;
+border:1px solid #555;
+font-size:18px;
+font-weight:bold;
+letter-spacing:2px;
+color:#cccccc;
+}
+
+.message-card{
+margin-top:40px;
+padding:25px;
+background:#101010;
+border:1px solid #2d2d2d;
+border-radius:14px;
+text-align:left;
+}
+
+.message-card h3{
+color:#ffb000;
+margin-bottom:18px;
+}
+
+.message-card p{
+color:#d0d0d0;
+line-height:1.8;
+margin-bottom:15px;
+}
+
+.quote{
+margin-top:30px;
+padding:20px;
+background:rgba(255,176,0,.08);
+border-left:4px solid #ffb000;
+border-radius:8px;
+font-style:italic;
+color:#e7e7e7;
+line-height:1.8;
 }
 
 .footer{
-    padding:20px;
-    text-align:center;
-    font-size:13px;
-    color:#888;
-    border-top:1px solid rgba(255,255,255,0.07);
+padding:25px;
+border-top:1px solid #2c2c2c;
+text-align:center;
+font-size:13px;
+color:#888;
 }
+
+.footer strong{
+color:#ffb000;
+}
+
+@media(max-width:600px){
+
+.body{
+padding:30px 22px;
+}
+
+h1{
+font-size:26px;
+}
+
+.event-name{
+font-size:22px;
+}
+
+.status{
+font-size:16px;
+padding:12px 24px;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="container">
+<div class="wrapper">
+
+<div class="card">
 
 <div class="header">
-DevForge
+
+<div class="logo">
+🚀 CSSEVENT
 </div>
 
-<div class="content">
-
-<h2>Application Status Update</h2>
-
-<p>Thank you for taking the time to apply for <b>${eventName}</b>. We sincerely appreciate your interest and the effort you put into your application.</p>
-
-<div class="status-box">
-NOT SELECTED
+<div class="tagline">
+Build • Code • Innovate
 </div>
 
-<p class="info">
-We received a high volume of excellent applications for this project. After careful review, we regret to inform you that we are unable to move forward with your application at this time.
+</div>
+
+<div class="body">
+
+<div class="icon">
+📩
+</div>
+
+<h1>Application Update</h1>
+
+<p class="subtitle">
+Thank you for registering for <strong>${eventName}</strong>. We truly appreciate your interest and the effort you put into your application.
 </p>
 
-<p class="info" style="margin-top: 25px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 20px;">
-Please don't let this discourage you. The developer community is vast, and there will be many more opportunities to collaborate and showcase your skills.<br><br>
-Keep building, and we hope to see you apply for future events!
+<div class="event-box">
+
+<div class="event-title">
+Event
+</div>
+
+<div class="event-name">
+${eventName}
+</div>
+
+</div>
+
+<div class="status">
+Not Selected
+</div>
+
+<div class="message-card">
+
+<h3>Selection Result</h3>
+
+<p>
+After carefully reviewing all registrations, we received an overwhelming number of applications from talented students.
 </p>
+
+<p>
+Unfortunately, your application could not be selected for this edition of the contest.
+</p>
+
+<p>
+Please remember that this decision does not reflect your potential as a programmer. We encourage you to continue practicing and improving your coding skills.
+</p>
+
+</div>
+
+<div class="quote">
+
+💡 <strong>Keep Coding!</strong><br><br>
+
+Every great programmer has faced rejection at some point. Continue learning, solving problems, and participating in future contests. We look forward to seeing you in our upcoming events.
+
+</div>
 
 </div>
 
 <div class="footer">
-© 2026 DevForge • Build. Share. Innovate.
+
+<strong>CSSEVENT Team</strong><br><br>
+
+© 2026 CSSEVENT • Code. Learn. Grow.
+
+</div>
+
 </div>
 
 </div>
 
 </body>
 </html>
-    `;
+`;
 
     const mailOptions = {
         from: process.env.EMAIL,

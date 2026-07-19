@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from "react-router-dom";
-import Works from './Works'
-import PopularSkills from './About'
+import HowItWorks from './Works';
+import PopularTopics from './About';
 
 export default function Home() {
   const canvasRef = useRef(null)
@@ -109,7 +109,7 @@ export default function Home() {
           <div className="hero-btns">
             <Link to="/ViewAllProjectRequirment">
             <button className="btn-primary">Apply for Event</button></Link>
-              <Link to="/viewallhackthonrequirment">
+              <Link to="/about">
             <button className="btn-glass">Know about the event</button></Link>
           </div>
 
@@ -179,8 +179,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Works/>
-      <PopularSkills/>
+      <HowItWorks/>
+      <PopularTopics/>
     </div>
   )
 }

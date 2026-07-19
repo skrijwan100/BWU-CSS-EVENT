@@ -1,0 +1,343 @@
+
+
+.ed-container {
+  background-color: #030303;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 7rem 2rem;
+  overflow-x: hidden;
+}
+
+/* Typography & Colors */
+.ed-container h1, .ed-container h2, .ed-container h3 {
+  font-family: 'Rajdhani', sans-serif;
+  margin: 0;
+}
+
+.ed-container span {
+  color: #facc15;
+}
+
+.ed-icon.yellow, .ed-icon-yellow {
+  color: #facc15;
+}
+
+/* Hero Section */
+.ed-hero {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 5rem;
+}
+
+.ed-badge {
+  display: inline-block;
+  background: rgba(250, 204, 21, 0.1);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  color: #facc15;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.ed-title {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.ed-subtitle {
+  color: #a0a0a0;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+/* Highlights Section */
+.ed-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 6rem;
+}
+
+.ed-highlight-card {
+  background: #0a0a0a;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.ed-highlight-card:hover {
+  transform: translateY(-5px);
+  border-color: #facc15;
+}
+
+.ed-highlight-card .ed-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+}
+
+.ed-highlight-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.ed-highlight-card p {
+  color: #888;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.ed-highlight-card p strong {
+  color: #facc15;
+}
+
+/* Roadmap Section */
+.ed-roadmap {
+  max-width: 1200px;
+  margin: 0 auto 6rem;
+}
+
+.ed-section-title {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+.ed-stages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.ed-stage-card {
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ed-stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.ed-stage-month {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #888;
+}
+
+.ed-stage-name {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Revealed Stage (August) */
+.ed-stage-card.revealed {
+  background: linear-gradient(145deg, #111 0%, #050505 100%);
+  border: 1px solid #333;
+  box-shadow: 0 0 30px rgba(250, 204, 21, 0.05);
+}
+
+.ed-stage-card.revealed .ed-stage-month {
+  color: #facc15;
+}
+
+.ed-stage-card.revealed .ed-icon-small {
+  color: #facc15;
+}
+
+.ed-stage-desc {
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+/* New Stats Area */
+.ed-stage-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: rgba(250, 204, 21, 0.04);
+  border: 1px solid rgba(250, 204, 21, 0.15);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ed-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+.ed-stat-item strong {
+  color: #fff;
+}
+
+.ed-syllabus {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.ed-sem-box {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 1rem;
+  border-left: 3px solid #facc15;
+}
+
+.ed-sem-box h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0 0 0.75rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ed-sem-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ed-sem-box li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+.ed-sem-box li svg {
+  color: #facc15;
+}
+
+/* Locked Stages (Sept, Oct, Nov) */
+.ed-stage-card.locked {
+  background: #080808;
+  border: 1px dashed #222;
+  opacity: 0.7;
+}
+
+.ed-stage-card.locked .ed-stage-name {
+  color: #555;
+}
+
+.ed-stage-card.locked .ed-icon-small {
+  color: #444;
+}
+
+.ed-locked-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-grow: 1;
+  margin-top: 2rem;
+  color: #444;
+}
+
+.ed-lock-icon {
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.ed-locked-content p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 200px;
+}
+
+/* Rules Section */
+.ed-rules {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ed-rules-box {
+  background: rgba(250, 204, 21, 0.03);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  border-radius: 16px;
+  padding: 3rem;
+}
+
+.ed-rules-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.ed-rules-header h2 {
+  font-size: 2.5rem;
+  color: #facc15;
+}
+
+.ed-rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ed-rules-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 1.05rem;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+.ed-rules-list li svg {
+  flex-shrink: 0;
+  color: #facc15;
+  margin-top: 0.15rem;
+}
+
+.ed-rules-list li strong {
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ed-title {
+    font-size: 2.8rem;
+  }
+  .ed-rules-box {
+    padding: 2rem;
+  }
+  .ed-rules-header h2 {
+    font-size: 2rem;
+  }
+}

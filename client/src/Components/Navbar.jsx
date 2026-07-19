@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { Settings, Globe, Sparkles, LogOut, Pencil } from "lucide-react";
 import { useUserData } from "../context/UserdataContext";
 import secureLocalStorage from "react-secure-storage";
-const NAV_ITEMS =[{title: "Home",link:''}, {title:"Event",link:'viewallprojectrequirment'},{title: "Learderboard", link:'viewallhackthonrequirment'}];
+const NAV_ITEMS =[{title: "Home",link:''}, {title:"Event",link:'event'},{title: "Learderboard", link:'leaderbord'},{title:"About", link:"about"}];
 
 
 export default function Navbar() {

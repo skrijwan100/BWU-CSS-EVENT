@@ -25,6 +25,8 @@ import PostHackthon from './Pages/PostHackthon';
 import PostProject from './Pages/PostProject';
 import Profile from './Pages/Profile';
 import AccountSetting from './Pages/AccountSetting';
+import Leaderboard from './Pages/Leaderboard';
+import EventDetails from './Pages/AboutEvent';
 
 function App() {
   const { user } = useAuth()
@@ -95,9 +97,11 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/postrequiremen' element={<Requirment />} />
           <Route path='/viewallhackthonrequirment' element={<ViewAllRequirment/>}/>
-          <Route path='/viewallprojectrequirment' element={<ViewAllProjectRequirment/>}/>
+          <Route path='/event' element={<ViewAllProjectRequirment/>}/>
           <Route path='/application' element={<UserApplication/>}/>
           <Route path='/post' element={<Post/>}/>
+          <Route path='/about' element={<EventDetails/>}/>
+          <Route path='/leaderbord' element={<Leaderboard/>}/>
           <Route path='/accountsettings' element={<AccountSetting setUpdate={setUpdate}/>}/>
           <Route path='/post/hackthon' element={<PostHackthon/>}/>
           <Route path='/post/project' element={<PostProject/>}/>

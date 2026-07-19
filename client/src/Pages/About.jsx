@@ -1,118 +1,62 @@
-import React, { useRef } from "react";
+import React from "react";
+import { Brackets, Calculator, Link2, Layers, RefreshCcw, Cpu, Network } from "lucide-react";
 
-const skills = [
+const topics = [
   {
-    name: "React",
-    tag: "Frontend",
+    name: "Arrays & Strings",
+    tag: "Data Structure",
     bg: "rgba(97,218,251,0.12)",
     border: "rgba(97,218,251,0.25)",
     iconColor: "#61DAFB",
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width={34} height={34}>
-        <ellipse cx="20" cy="20" rx="17" ry="6.5" stroke="#61DAFB" strokeWidth="1.8" />
-        <ellipse cx="20" cy="20" rx="17" ry="6.5" stroke="#61DAFB" strokeWidth="1.8" transform="rotate(60 20 20)" />
-        <ellipse cx="20" cy="20" rx="17" ry="6.5" stroke="#61DAFB" strokeWidth="1.8" transform="rotate(120 20 20)" />
-        <circle cx="20" cy="20" r="2.8" fill="#61DAFB" />
-      </svg>
-    ),
+    icon: <Brackets color="#61DAFB" size={34} strokeWidth={1.5} />,
   },
   {
-    name: "UI/UX Design",
-    tag: "Design",
+    name: "Mathematics",
+    tag: "Algorithm",
     bg: "rgba(255,120,180,0.1)",
     border: "rgba(255,120,180,0.25)",
     iconColor: "#FF78B4",
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width={34} height={34}>
-        <rect x="6" y="6" width="12" height="12" rx="3" fill="rgba(255,120,180,0.25)" stroke="#FF78B4" strokeWidth="1.6" />
-        <rect x="22" y="6" width="12" height="12" rx="6" fill="rgba(255,120,180,0.25)" stroke="#FF78B4" strokeWidth="1.6" />
-        <rect x="6" y="22" width="12" height="12" rx="6" fill="rgba(255,120,180,0.15)" stroke="#FF78B4" strokeWidth="1.6" strokeDasharray="3 2" />
-        <rect x="22" y="22" width="12" height="12" rx="3" fill="rgba(255,120,180,0.25)" stroke="#FF78B4" strokeWidth="1.6" />
-      </svg>
-    ),
+    icon: <Calculator color="#FF78B4" size={34} strokeWidth={1.5} />,
   },
   {
-    name: "Node.js",
-    tag: "Backend",
+    name: "Linked List",
+    tag: "Data Structure",
     bg: "rgba(104,216,93,0.1)",
     border: "rgba(104,216,93,0.25)",
     iconColor: "#68D85D",
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width={34} height={34}>
-        <path d="M20 4L34 12V28L20 36L6 28V12L20 4Z" stroke="#68D85D" strokeWidth="1.8" fill="rgba(104,216,93,0.1)" />
-        <path d="M20 13V20L26 23.5" stroke="#68D85D" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="20" cy="20" r="2" fill="#68D85D" />
-      </svg>
-    ),
+    icon: <Link2 color="#68D85D" size={34} strokeWidth={1.5} />,
   },
   {
-    name: "Python",
-    tag: "Language",
+    name: "Stack & Queue",
+    tag: "Data Structure",
     bg: "rgba(255,195,0,0.1)",
     border: "rgba(255,195,0,0.25)",
     iconColor: "#FFC300",
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width={34} height={34}>
-        <path d="M20 6C13.5 6 14 8.7 14 11v3h12v2H12s-6 0-6 8 5 8 5 8h4v-3.5S14.5 32 20 32s5.5-3.5 5.5-3.5H28s5 0 5-8-6-7-6-7H14v-2h12v-2C26 8.7 26.5 6 20 6Z" fill="rgba(255,195,0,0.15)" stroke="#FFC300" strokeWidth="1.5" />
-        <circle cx="17" cy="10" r="1.5" fill="#FFC300" />
-        <circle cx="23" cy="30" r="1.5" fill="#FFC300" />
-      </svg>
-    ),
+    icon: <Layers color="#FFC300" size={34} strokeWidth={1.5} />,
   },
   {
-    name: "AI / ML",
-    tag: "Intelligence",
+    name: "Recursion",
+    tag: "Algorithm",
     bg: "rgba(155,100,255,0.1)",
     border: "rgba(155,100,255,0.25)",
     iconColor: "#9B64FF",
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width={34} height={34}>
-        <circle cx="20" cy="20" r="5" fill="rgba(155,100,255,0.25)" stroke="#9B64FF" strokeWidth="1.8" />
-        <circle cx="8" cy="12" r="2.5" fill="rgba(155,100,255,0.2)" stroke="#9B64FF" strokeWidth="1.4" />
-        <circle cx="32" cy="12" r="2.5" fill="rgba(155,100,255,0.2)" stroke="#9B64FF" strokeWidth="1.4" />
-        <circle cx="8" cy="28" r="2.5" fill="rgba(155,100,255,0.2)" stroke="#9B64FF" strokeWidth="1.4" />
-        <circle cx="32" cy="28" r="2.5" fill="rgba(155,100,255,0.2)" stroke="#9B64FF" strokeWidth="1.4" />
-        <line x1="15" y1="17" x2="10" y2="14" stroke="#9B64FF" strokeWidth="1.2" opacity="0.7" />
-        <line x1="25" y1="17" x2="30" y2="14" stroke="#9B64FF" strokeWidth="1.2" opacity="0.7" />
-        <line x1="15" y1="23" x2="10" y2="26" stroke="#9B64FF" strokeWidth="1.2" opacity="0.7" />
-        <line x1="25" y1="23" x2="30" y2="26" stroke="#9B64FF" strokeWidth="1.2" opacity="0.7" />
-      </svg>
-    ),
+    icon: <RefreshCcw color="#9B64FF" size={34} strokeWidth={1.5} />,
   },
   {
-    name: "Mobile Dev",
-    tag: "Cross-Platform",
+    name: "Bit Manipulation",
+    tag: "Algorithm",
     bg: "rgba(0,200,255,0.1)",
     border: "rgba(0,200,255,0.25)",
     iconColor: "#00C8FF",
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width={34} height={34}>
-        <rect x="13" y="4" width="14" height="32" rx="3" fill="rgba(0,200,255,0.1)" stroke="#00C8FF" strokeWidth="1.8" />
-        <line x1="17" y1="9" x2="23" y2="9" stroke="#00C8FF" strokeWidth="1.8" strokeLinecap="round" />
-        <circle cx="20" cy="31" r="1.5" fill="#00C8FF" />
-        <rect x="16" y="14" width="8" height="12" rx="1.5" fill="rgba(0,200,255,0.15)" stroke="#00C8FF" strokeWidth="1" />
-      </svg>
-    ),
+    icon: <Cpu color="#00C8FF" size={34} strokeWidth={1.5} />,
   },
   {
-    name: "Blockchain",
-    tag: "Web3",
+    name: "Trees",
+    tag: "Data Structure",
     bg: "rgba(255,165,0,0.1)",
     border: "rgba(255,165,0,0.25)",
     iconColor: "#FFA500",
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width={34} height={34}>
-        <rect x="4" y="15" width="10" height="10" rx="2" fill="rgba(255,165,0,0.15)" stroke="#FFA500" strokeWidth="1.6" />
-        <rect x="15" y="8" width="10" height="10" rx="2" fill="rgba(255,165,0,0.15)" stroke="#FFA500" strokeWidth="1.6" />
-        <rect x="15" y="22" width="10" height="10" rx="2" fill="rgba(255,165,0,0.15)" stroke="#FFA500" strokeWidth="1.6" />
-        <rect x="26" y="15" width="10" height="10" rx="2" fill="rgba(255,165,0,0.15)" stroke="#FFA500" strokeWidth="1.6" />
-        <line x1="14" y1="20" x2="15" y2="20" stroke="#FFA500" strokeWidth="1.4" />
-        <line x1="20" y1="18" x2="20" y2="22" stroke="#FFA500" strokeWidth="1.4" />
-        <line x1="25" y1="20" x2="26" y2="20" stroke="#FFA500" strokeWidth="1.4" />
-        <line x1="20" y1="14" x2="20" y2="15" stroke="#FFA500" strokeWidth="1.4" />
-        <line x1="20" y1="25" x2="20" y2="26" stroke="#FFA500" strokeWidth="1.4" />
-      </svg>
-    ),
+    icon: <Network color="#FFA500" size={34} strokeWidth={1.5} />,
   },
 ];
 
@@ -127,18 +71,17 @@ const particles = [
   { x: 85, y: 85, size: 2, delay: 3.5 },
 ];
 
-const doubled = [...skills, ...skills];
+const doubled = [...topics, ...topics];
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
   .df-root {
-  
-
     padding: 80px 0;
     overflow: hidden;
     position: relative;
     min-height: 420px;
+    background-color: #030303;
   }
 
   .df-particle {
@@ -188,7 +131,7 @@ const css = `
     position: absolute;
     top: 0; bottom: 0; left: 0;
     width: 120px;
-    background: linear-gradient(to right, #000, transparent);
+    background: linear-gradient(to right, #030303, transparent);
     z-index: 10;
     pointer-events: none;
   }
@@ -197,7 +140,7 @@ const css = `
     position: absolute;
     top: 0; bottom: 0; right: 0;
     width: 120px;
-    background: linear-gradient(to left, #000, transparent);
+    background: linear-gradient(to left, #030303, transparent);
     z-index: 10;
     pointer-events: none;
   }
@@ -273,7 +216,7 @@ const css = `
     box-shadow: 0 0 20px rgba(255,195,0,0.25);
   }
 
-  .df-skill-name {
+  .df-topic-name {
     font-family: 'Rajdhani', sans-serif;
     font-size: 15px;
     font-weight: 700;
@@ -282,7 +225,7 @@ const css = `
     letter-spacing: 0.01em;
   }
 
-  .df-skill-tag {
+  .df-topic-tag {
     font-size: 11px;
     color: rgba(255,195,0,0.6);
     font-weight: 400;
@@ -306,7 +249,7 @@ const css = `
   .df-card:hover .df-glow-ring { opacity: 1; }
 `;
 
-export default function PopularSkills() {
+export default function PopularTopics() {
   return (
     <>
       <style>{css}</style>
@@ -334,7 +277,7 @@ export default function PopularSkills() {
         <div style={{ textAlign: "center", marginBottom: 52, position: "relative", zIndex: 2, padding: "0 24px" }}>
           <div className="df-label">
             <span className="df-label-dot" />
-            DevForge Platform
+            Coding Contest 2026
           </div>
           <h2
             style={{
@@ -347,8 +290,7 @@ export default function PopularSkills() {
               lineHeight: 1.1,
             }}
           >
-            Popular{" "}
-            <span style={{ color: "#FFC300" }}>Skills</span>
+            Popular <span style={{ color: "#FFC300" }}>Topics</span>
           </h2>
           <p
             style={{
@@ -360,7 +302,7 @@ export default function PopularSkills() {
               lineHeight: 1.65,
             }}
           >
-            Explore the most in-demand skills and find the right partners for your project.
+            Explore the core data structures and algorithms covered across the 4 stages of our department contest.
           </p>
         </div>
 
@@ -370,17 +312,17 @@ export default function PopularSkills() {
           <div className="df-fade-right" />
           <div className="df-track-outer" style={{ overflow: "hidden", padding: "24px 0 32px" }}>
             <div className="df-track">
-              {doubled.map((skill, i) => (
+              {doubled.map((topic, i) => (
                 <div className="df-card" key={i}>
                   <div className="df-glow-ring" />
                   <div
                     className="df-icon-wrap"
-                    style={{ background: skill.bg }}
+                    style={{ background: topic.bg }}
                   >
-                    {skill.icon}
+                    {topic.icon}
                   </div>
-                  <div className="df-skill-name">{skill.name}</div>
-                  <div className="df-skill-tag">{skill.tag}</div>
+                  <div className="df-topic-name">{topic.name}</div>
+                  <div className="df-topic-tag">{topic.tag}</div>
                 </div>
               ))}
             </div>

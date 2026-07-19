@@ -7,6 +7,7 @@ import RequirmentHackthon from '../models/RequirmentHackthon.js';
 import RequirmentProject from '../models/RequirmentProject.js';
 import sendAcceptanceEmail from '../middlewares/sendAcceptMail.js';
 import sendRejectionEmail from '../middlewares/sendRejactmail.js';
+import eventData from '../models/EventData.js';
 
 const applicationRouter = express.Router();
 
@@ -233,6 +234,19 @@ applicationRouter.put('/accept-application/:id', fetchuer, async (req, res) => {
         }
         const update = await userApplication.findByIdAndUpdate(req.params.id, { $set: updateData }, { new: true })
         const sendmail= await sendAcceptanceEmail(email,eventName)
+        const userData= await User.findOne({email}).select("-password").lean();
+        const newEventParticipant= new eventData({
+            eventName:eventName,
+            studentName:userData.fullname,
+            studentGmail:userData.email,
+            studentCode:userData.studentCode,
+            studentSecation:userData.section,
+            studentPhoneNo:userData.phoneNumber,
+            studentProfileimage:userData.image_url,
+            applicationStatus:'accepted'
+        }) 
+        await newEventParticipant.save();
+        
         return res.status(202).json({ "msg": "Accepted", status: true })
 
     } catch (err) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, Twitter, Mail, MapPin, Code2 } from 'lucide-react';
-import './Footer.css'; // Importing the standard CSS file
+import '../styles/footer.css'; // Importing the standard CSS file
+import { Link } from 'react-router';
 
 const Footer = () => {
   return (
@@ -24,10 +25,10 @@ const Footer = () => {
         <div className="footer-links">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#event">Event Details</a></li>
-            <li><a href="#leaderboard">Leaderboard</a></li>
-            <li><a href="#apply">Apply for Event</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/event">Event Details</Link></li>
+            <li><Link to="/leaderbord">Leaderboard</Link></li>
+            <li><Link to="/event">Apply for Event</Link></li>
           </ul>
         </div>
 
@@ -37,7 +38,7 @@ const Footer = () => {
           <ul>
             <li>
               <Mail size={18} /> 
-              <span>support@cssevent.com</span>
+              <span>undefinedbca@gmail.com</span>
             </li>
             <li>
               <MapPin size={18} /> 

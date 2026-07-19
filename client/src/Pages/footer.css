@@ -1,5 +1,13 @@
 /* --- Footer.css --- */
-
+:root {
+  /* Matching colors from image_fba760.jpg */
+  --bg-dark: #050505; /* Deep background */
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --theme-yellow: #ffb703; /* The primary yellow/amber from the design */
+  --text-main: #ffffff;
+  --text-muted: #9ca3af;
+  --glow-yellow: rgba(255, 183, 3, 0.35);
+}
 
 .footer-container {
   background-color: var(--bg-dark);
