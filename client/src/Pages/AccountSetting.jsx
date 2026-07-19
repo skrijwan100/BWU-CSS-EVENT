@@ -29,9 +29,11 @@ const customStyles = `
 `;
 
 // ── Skills Tag Input ──────────────────────────────────────────────────────────
+// ── Skills Tag Input ──────────────────────────────────────────────────────────
 function SkillsInput({ value, onChange }) {
   const [inputVal, setInputVal] = useState("");
   const [focused, setFocused] = useState(false);
+
   const addTags = (raw) => {
     const parts = raw.split(",").map((t) => t.trim()).filter(Boolean);
     const next = [...new Set([...value, ...parts])];
@@ -39,8 +41,19 @@ function SkillsInput({ value, onChange }) {
     setInputVal("");
   };
 
+  // Handle typing normally, but trigger addTags if a comma is typed or pasted
+  const handleChange = (e) => {
+    const val = e.target.value;
+    if (val.includes(",")) {
+      addTags(val);
+    } else {
+      setInputVal(val);
+    }
+  };
+
   const handleKey = (e) => {
-    if (e.key === "Enter" || e.key === ",") {
+    // We only need to check for Enter and Backspace here now
+    if (e.key === "Enter") {
       e.preventDefault();
       if (inputVal.trim()) addTags(inputVal);
     } else if (e.key === "Backspace" && !inputVal && value.length > 0) {
@@ -65,7 +78,7 @@ function SkillsInput({ value, onChange }) {
         className="tag-input-inner"
         value={inputVal}
         placeholder={value.length === 0 ? "Add skills — press Enter or comma , Like - c++, Java," : ""}
-        onChange={(e) => setInputVal(e.target.value)}
+        onChange={handleChange}
         onKeyDown={handleKey}
         onFocus={() => setFocused(true)}
         onBlur={() => { setFocused(false); if (inputVal.trim()) addTags(inputVal); }}

@@ -5,16 +5,16 @@ import { useAuth } from "../context/AuthContext";
 import { Settings, Globe, Sparkles, LogOut, Pencil } from "lucide-react";
 import { useUserData } from "../context/UserdataContext";
 import secureLocalStorage from "react-secure-storage";
-const NAV_ITEMS =[{title: "Home",link:''}, {title:"Event",link:'event'},{title: "Learderboard", link:'leaderbord'},{title:"About", link:"about"}];
+const NAV_ITEMS = [{ title: "Home", link: '' }, { title: "Event", link: 'event' }, { title: "Learderboard", link: 'leaderbord' }, { title: "About", link: "about" }];
 
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState("Home");
-  const {logout } = useAuth();
-  const {useralldata}=useUserData()
-  
+  const { logout } = useAuth();
+  const { useralldata } = useUserData()
+
   // Added Authentication States
   const [isLogin, setIsLogin] = useState(true);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -37,13 +37,13 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  const naviget=useNavigate()
-const handlelogout=async()=>{
- await logout();
- secureLocalStorage.removeItem('auth-token');
-  naviget("/")
-  window.location.reload();
-}
+  const naviget = useNavigate()
+  const handlelogout = async () => {
+    await logout();
+    secureLocalStorage.removeItem('auth-token');
+    naviget("/")
+    window.location.reload();
+  }
   return (
     <div style={{ fontFamily: "'Rajdhani', sans-serif" }}>
       <style>{`
@@ -372,7 +372,7 @@ const handlelogout=async()=>{
 
       <nav className="nb-root">
         <div className={`nb-inner${scrolled ? " nb-scrolled" : ""}`}>
-          
+
           {/* Logo */}
           <Link to="/" className="nb-logo">
             <img className="logo-style" style={{ height: "55px", width: "55px" }} src={logo} alt="" />
@@ -381,14 +381,19 @@ const handlelogout=async()=>{
 
           {/* Desktop Links */}
           <ul className="nb-links">
-            {NAV_ITEMS.map((item,i) => (
+            {NAV_ITEMS.map((item, i) => (
               <li key={i}>
                 <Link
                   to={`/${item.link}`}
                   className={`nb-link ${activeItem === item ? "nb-active" : ""}`}
                   onClick={(e) => {
-                     // e.preventDefault(); 
-                     setActiveItem(item); 
+                    // e.preventDefault(); 
+                    setActiveItem(item);
+                    window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+                    });
                   }}
                 >
                   {item.title}
@@ -401,8 +406,20 @@ const handlelogout=async()=>{
           <div className="nb-btns">
             {!useralldata ? (
               <>
-                <Link to="/login"><button className="nb-btn-login">Log In</button></Link>
-                <Link to="/signup"><button className="nb-btn-signup">Sign Up</button></Link>
+                <Link to="/login" onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+                  });
+                }}><button className="nb-btn-login">Log In</button></Link>
+                <Link to="/signup" onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+                  });
+                }}><button className="nb-btn-signup">Sign Up</button></Link>
               </>
             ) : (
               <div className="nb-profile-wrapper" ref={dropdownRef}>
@@ -419,7 +436,7 @@ const handlelogout=async()=>{
                     <p className="nb-profile-name">{useralldata.fullname}</p>
                     <p className="nb-profile-email">{useralldata.email}</p>
                   </div>
-                  
+
                   <ul className="nb-profile-menu">
                     <li>
                       <Link to="/accountsettings" className="nb-profile-item">
@@ -433,11 +450,11 @@ const handlelogout=async()=>{
                     </li>
                     <li>
                       <Link to="/application" className="nb-profile-item">
-                        <Pencil  size={18} /> Your Application 
+                        <Pencil size={18} /> Your Application
                       </Link>
                     </li>
                     <li>
-                      <button 
+                      <button
                         className="nb-profile-item logout"
                         onClick={handlelogout} // Dummy logout action
                       >
@@ -466,7 +483,7 @@ const handlelogout=async()=>{
         {menuOpen && (
           <div className="nb-mobile">
             <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px 0" }}>
-              {NAV_ITEMS.map((item,i) => (
+              {NAV_ITEMS.map((item, i) => (
                 <li key={i}>
                   <Link
                     to={item.link}
@@ -474,6 +491,11 @@ const handlelogout=async()=>{
                     onClick={(e) => {
                       setActiveItem(item);
                       setMenuOpen(false);
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+                      });
                     }}
                   >
                     {item.title}
@@ -481,7 +503,7 @@ const handlelogout=async()=>{
                 </li>
               ))}
             </ul>
-            
+
             {/* Mobile Auth/Profile logic */}
             {!useralldata ? (
               <div className="nb-mobile-btns">
@@ -507,7 +529,7 @@ const handlelogout=async()=>{
                   <Link to="/application" className="nb-profile-item" style={{ padding: "8px 0" }}>
                     <Pencil size={18} /> Your Application
                   </Link>
-                  <button className="nb-profile-item logout" onClick={() => setIsLogin(false)} style={{ padding: "8px 0" }}>
+                  <button className="nb-profile-item logout" onClick={handlelogout} style={{ padding: "8px 0" }}>
                     <LogOut size={18} /> Sign out
                   </button>
                 </div>

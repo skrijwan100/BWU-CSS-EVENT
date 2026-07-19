@@ -107,7 +107,7 @@ export default function Home() {
           </p>
 
           <div className="hero-btns">
-            <Link to="/ViewAllProjectRequirment">
+            <Link to="/event">
             <button className="btn-primary">Apply for Event</button></Link>
               <Link to="/about">
             <button className="btn-glass">Know about the event</button></Link>

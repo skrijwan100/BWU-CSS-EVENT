@@ -140,7 +140,9 @@ export default function Login() {
       setfinalemail(data.user.email)
       handleSuccess("Login successful")
       setloder1(false)
-      return naviget("/")
+      naviget("/")
+      window.location.reload();
+      return ;
     } catch (error) {
       console.log(error)
       handleError("Someing wrong. Try Again !")

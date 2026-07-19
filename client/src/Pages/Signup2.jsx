@@ -93,6 +93,7 @@ function BubbleCanvas() {
 }
 
 // ── Skills Tag Input ──────────────────────────────────────────────────────────
+// ── Skills Tag Input ──────────────────────────────────────────────────────────
 function SkillsInput({ value, onChange }) {
   const [inputVal, setInputVal] = useState("");
   const [focused, setFocused] = useState(false);
@@ -104,8 +105,19 @@ function SkillsInput({ value, onChange }) {
     setInputVal("");
   };
 
+  // Handle typing normally, but trigger addTags if a comma is typed or pasted
+  const handleChange = (e) => {
+    const val = e.target.value;
+    if (val.includes(",")) {
+      addTags(val);
+    } else {
+      setInputVal(val);
+    }
+  };
+
   const handleKey = (e) => {
-    if (e.key === "Enter" || e.key === ",") {
+    // We only need to check for Enter and Backspace here now
+    if (e.key === "Enter") {
       e.preventDefault();
       if (inputVal.trim()) addTags(inputVal);
     } else if (e.key === "Backspace" && !inputVal && value.length > 0) {
@@ -130,7 +142,7 @@ function SkillsInput({ value, onChange }) {
         className="tag-input-inner"
         value={inputVal}
         placeholder={value.length === 0 ? "Add skills — press Enter or comma , Like - c++, Java," : ""}
-        onChange={(e) => setInputVal(e.target.value)}
+        onChange={handleChange}
         onKeyDown={handleKey}
         onFocus={() => setFocused(true)}
         onBlur={() => { setFocused(false); if (inputVal.trim()) addTags(inputVal); }}
@@ -138,7 +150,6 @@ function SkillsInput({ value, onChange }) {
     </div>
   );
 }
-
 export default function Signup2() {
   const [form, setForm] = useState({
     profilePic: "", // Added to state for the upload preview
@@ -187,9 +198,9 @@ export default function Signup2() {
     if (!phoneRegex.test(cleanedPhone)) {
 
       e.phoneNumber = 'Please enter a valid 10-digit Indian mobile number.'
-         
-         
-        }
+
+
+    }
     if (!form.profilePic) e.profilePic = "Upload profile pic"
     if (!form.fullName.trim()) e.fullName = "Full name is required";
     if (!email) e.email = "Email is required";
@@ -220,9 +231,18 @@ export default function Signup2() {
     e.preventDefault();
     const errs = validate();
     setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
+    if (Object.keys(errs).length > 0) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+      });
+
+      return;
+    }
     console.log(form);
     setLoading(true);
+
     try {
       const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/register`;
       const formdata = new FormData();
@@ -241,7 +261,7 @@ export default function Signup2() {
         protfolio: form.portfolio,
         studentCode: form.stdCode,
         section: form.section,
-        phoneNumber:form.phoneNumber
+        phoneNumber: form.phoneNumber
       })
       formdata.append("userinfo", JSON.stringify(useralldata))
       const res = await axios.post(url, formdata, {
@@ -264,6 +284,13 @@ export default function Signup2() {
       console.log(res.data)
       setLoading(false);
       setSubmitted(true);
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
+      });
+
       setTimeout(() => { return naviget("/login"); }, 1000);
     } catch (error) {
       console.error(error);
