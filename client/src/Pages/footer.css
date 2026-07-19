@@ -1,0 +1,170 @@
+/* --- Footer.css --- */
+
+
+.footer-container {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  border-top: 1px solid var(--border-dark);
+  padding-top: 4rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Brand Section */
+.footer-brand .brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.brand-logo h2 {
+  color: var(--theme-yellow);
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.brand-logo .logo-icon {
+  color: var(--theme-yellow);
+}
+
+.footer-brand p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  max-width: 400px;
+  margin: 0;
+}
+
+/* Section Headings */
+.footer-links h3, 
+.footer-contact h3 {
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Lists styling */
+.footer-links ul, 
+.footer-contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.85rem;
+}
+
+/* Links & Hover Effects */
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+  color: var(--theme-yellow);
+  text-shadow: 0 0 10px var(--glow-yellow);
+}
+
+/* Contact Details */
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.footer-contact li svg {
+  color: var(--theme-yellow);
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 8px; /* Slightly rounded squares to match modern tech UI */
+  color: var(--text-main);
+  text-decoration: none;
+  border: 1px solid var(--border-dark);
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: rgba(255, 183, 3, 0.1);
+  color: var(--theme-yellow);
+  border-color: var(--theme-yellow);
+  box-shadow: 0 0 15px var(--glow-yellow);
+  transform: translateY(-3px);
+}
+
+/* Copyright Bottom Bar */
+.footer-bottom {
+  margin-top: 4rem;
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top: 1px solid var(--border-dark);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  
+  .footer-brand {
+    grid-column: 1 / -1; /* Make brand take full width on medium screens */
+  }
+  
+  .footer-brand p {
+    max-width: 600px;
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 600px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-container {
+    padding-top: 3rem;
+  }
+  
+  .footer-brand p {
+    max-width: 100%;
+  }
+}

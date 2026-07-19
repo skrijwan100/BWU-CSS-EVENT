@@ -1,0 +1,111 @@
+import './App.css'
+import { ToastContainer, Flip } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from './Components/Navbar' // Fix 1
+import Home from './Pages/Home'
+import Works from './Pages/Works'
+import Signup1 from './Pages/Signup1'
+import About from './Pages/About'
+import Signup2 from './Pages/Signup2';
+import Login from './Pages/Login';
+import { useEffect, useState } from 'react';
+import { useAuth } from './context/AuthContext';
+import { useUserData } from './context/UserdataContext';
+import LoadingScreen from './Components/LodingScreen';
+import secureLocalStorage from 'react-secure-storage';
+import Footer from './Pages/Footer';
+import Requirment from './Pages/PostUserRequirment';
+import HackathonDetail from './Pages/AllReqirment';
+import ViewAllRequirment from './Pages/ViewAllRequiremnt';
+import ViewAllProjectRequirment from './Pages/viewAllProjectRequirment';
+import UserApplication from './Pages/UserApplication';
+import Post from './Pages/Post';
+import PostHackthon from './Pages/PostHackthon';
+import PostProject from './Pages/PostProject';
+import Profile from './Pages/Profile';
+import AccountSetting from './Pages/AccountSetting';
+
+function App() {
+  const { user } = useAuth()
+  const {localuser}=useAuth();
+  const { setUseralldata } = useUserData();
+  const [Isloginuser, setIsIsloginuser] = useState(false)
+  const [update,setUpdate]=useState(null)
+  useEffect(() => {
+    setUpdate(null)
+    const CheckUserLogin = async () => {
+      setIsIsloginuser(false)
+      try {
+        const token = await user?.getIdToken();
+        const localtoken = secureLocalStorage.getItem('auth-token');
+        if (localtoken) {
+          const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/getuser`;
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": localtoken
+            },
+          });
+          const data = await response.json();
+          setUseralldata(data.userdata)
+           setIsIsloginuser(true)
+         
+        }
+        if (token) {
+          const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/getuser`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          const data = await res.json();
+          setUseralldata(data.userdata)
+          setIsIsloginuser(true)
+        }
+        if(!token || !localtoken ){
+        setIsIsloginuser(true)
+        }
+        
+      } catch (error) {
+        console.log(error)
+        setIsIsloginuser(true)
+      }
+    }
+   
+      CheckUserLogin();
+    
+    
+  }, [user,localuser,update])
+  if (!Isloginuser)
+    return (
+      <LoadingScreen />
+
+    )
+  if (Isloginuser) {
+    return (
+      <BrowserRouter>
+        <Navbar />
+        <ToastContainer transition={Flip} />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/Works' element={<Works />} />
+          <Route path='/signup' element={<Signup1 />} />
+          <Route path='/Signup2' element={<Signup2 />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/postrequiremen' element={<Requirment />} />
+          <Route path='/viewallhackthonrequirment' element={<ViewAllRequirment/>}/>
+          <Route path='/viewallprojectrequirment' element={<ViewAllProjectRequirment/>}/>
+          <Route path='/application' element={<UserApplication/>}/>
+          <Route path='/post' element={<Post/>}/>
+          <Route path='/accountsettings' element={<AccountSetting setUpdate={setUpdate}/>}/>
+          <Route path='/post/hackthon' element={<PostHackthon/>}/>
+          <Route path='/post/project' element={<PostProject/>}/>
+          <Route path='/profile/:id' element={<Profile/>}/>
+        </Routes>
+        <Footer/>
+      </BrowserRouter>
+    )
+  }
+}
+export default App;
