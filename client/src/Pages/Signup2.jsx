@@ -270,17 +270,6 @@ export default function Signup2() {
         },
       });
 
-      // const responce = await fetch(url, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify({
-
-      //     // Note: form.profilePic is available here if your backend needs it!
-      //   })
-      // });
-
       console.log(res.data)
       setLoading(false);
       setSubmitted(true);
@@ -291,7 +280,12 @@ export default function Signup2() {
         behavior: 'smooth', // Optional: creates a smooth animation instead of an instant jump
       });
 
-      setTimeout(() => { return naviget("/login"); }, 1000);
+      setTimeout(() => {
+        naviget("/")
+        window.location.reload();
+        return
+          ;
+      }, 1000);
     } catch (error) {
       console.error(error);
       setLoading(false);
