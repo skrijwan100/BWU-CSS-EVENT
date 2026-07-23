@@ -56,6 +56,7 @@ const Footer = () => {
 
       {/* Copyright Bar */}
       <div className="footer-bottom">
+        <a href="https://skrijwan.vercel.app" target='_blank'><p style={{color:"white", textDecoration:"none"}}>Made by Sk Rijwan</p></a>
         <p>&copy; {new Date().getFullYear()} CSSEVENT. All rights reserved.</p>
       </div>
     </footer>
