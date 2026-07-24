@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { handleError, handleSuccess } from '../Components/ErrorMessage'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { useAuth } from "../context/AuthContext";
 import { auth } from "../lib/firebase";
 import { GithubAuthProvider } from 'firebase/auth';
@@ -272,7 +272,7 @@ export default function Login() {
             </div>
 
             <p style={{ color: 'rgba(255,255,255,.22)', fontSize: '15px', textAlign: 'center', margin: '24px 0 0', lineHeight: 1.7, fontFamily: 'sans-serif' }}>
-              Don't have an account? <span className="link">Signup</span><br />
+              Don't have an account? <Link to="/signup"> <span className="link">Signup</span></Link><br />
               <span style={{ fontSize: '.76rem' }}>By continuing, you agree to our <span className="link">Terms</span> &amp; <span className="link">Privacy Policy</span>.</span>
             </p>
           </>
