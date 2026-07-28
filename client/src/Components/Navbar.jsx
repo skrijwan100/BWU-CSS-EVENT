@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import logo from "../assets/logo.png";
 import { useAuth } from "../context/AuthContext";
 import { Settings, Globe, Sparkles, LogOut, Pencil } from "lucide-react";
@@ -14,6 +14,7 @@ export default function Navbar() {
   const [activeItem, setActiveItem] = useState("Home");
   const { logout } = useAuth();
   const { useralldata } = useUserData()
+  const location =useLocation();
 
   // Added Authentication States
   const [isLogin, setIsLogin] = useState(true);
@@ -23,6 +24,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
+    // console.log(location.pathname)
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -385,10 +387,11 @@ export default function Navbar() {
               <li key={i}>
                 <Link
                   to={`/${item.link}`}
-                  className={`nb-link ${activeItem === item ? "nb-active" : ""}`}
+                  className={`nb-link ${location.pathname===`/${item.link}` ? "nb-active" : ""}`}
                   onClick={(e) => {
                     // e.preventDefault(); 
                     setActiveItem(item);
+                    console.log(location.pathname)
                     window.scrollTo({
                       top: 0,
                       left: 0,

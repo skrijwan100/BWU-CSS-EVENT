@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail, MapPin, Code2 } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, MapPin, Code2, Phone } from 'lucide-react';
 import '../styles/footer.css'; // Importing the standard CSS file
 import { Link } from 'react-router';
 
@@ -38,7 +38,11 @@ const Footer = () => {
           <ul>
             <li>
               <Mail size={18} /> 
-              <span>undefinedbca@gmail.com</span>
+             <a href="mailto:undefinedbca@gmail.com" style={{textDecoration:"none" , color:"white"}}> <span>undefinedbca@gmail.com</span></a>
+            </li>
+            <li>
+              <Phone size={18} /> 
+              <a href="tel:9635013952" style={{textDecoration:"none" , color:"white"}}><span>9635013952</span></a>
             </li>
             <li>
               <MapPin size={18} /> 
