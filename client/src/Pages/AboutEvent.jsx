@@ -12,6 +12,7 @@ import {
   UserMinus
 } from 'lucide-react';
 import '../styles/EventDetails.css';
+import TeamSection from './Team';
 
 const EventDetails = () => {
   return (
@@ -150,6 +151,7 @@ const EventDetails = () => {
             <li><AlertCircle size={18}/> <strong>Integrity:</strong> Internet searching, plagiarism, or any unfair practices will result in immediate disqualification.</li>
           </ul>
         </div>
+        <TeamSection/>
       </section>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from "react-router-dom";
 import HowItWorks from './Works';
 import PopularTopics from './About';
+import TeamSection from './Team';
 
 export default function Home() {
   const canvasRef = useRef(null)
@@ -181,6 +182,7 @@ export default function Home() {
       </div>
       <HowItWorks/>
       <PopularTopics/>
+      <TeamSection/>
     </div>
   )
 }
