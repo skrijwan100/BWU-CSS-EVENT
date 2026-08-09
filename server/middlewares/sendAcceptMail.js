@@ -1,16 +1,22 @@
 import nodemailer from 'nodemailer'
 import util from 'util'
 
-const sendAcceptanceEmail = async (sendtoemail, eventName) => {
+const sendAcceptanceEmail = async (sendtoemail, eventName, checkInId) => {
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.hostinger.com",
+        port: 465,
+        secure: true, // true for port 465
         auth: {
-            user: process.env.EMAIL,      // Your email
-            pass: process.env.PASSWORD    // App password (not your real password)
-        }
+            user: process.env.EMAIL,      
+            pass: process.env.PASSWORD,   
+        },
     });
 
-    const acceptanceEmailTemplateHTML = (eventName) => `
+    const qrCodeUrl = checkInId
+        ? `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(checkInId)}`
+        : '';
+
+    const acceptanceEmailTemplateHTML = (eventName, qrCodeUrl, checkInId) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,8 +132,47 @@ h1{
     letter-spacing:2px;
 }
 
-.info-card{
+/* --- NEW WHATSAPP SECTION STYLES --- */
+.whatsapp-box {
     margin-top:40px;
+    background:#0f1a12;
+    border:1px solid #1c3622;
+    border-radius:14px;
+    padding:25px;
+    text-align:center;
+}
+
+.whatsapp-title {
+    color:#25d366;
+    font-size:16px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.whatsapp-text {
+    color:#d3d3d3;
+    font-size:15px;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.whatsapp-btn {
+    display:inline-block;
+    background:#25d366;
+    color:#000;
+    text-decoration:none;
+    padding:12px 30px;
+    border-radius:50px;
+    font-weight:bold;
+    font-size:15px;
+    letter-spacing:1px;
+}
+/* ------------------------------------ */
+
+.info-card{
+    margin-top:30px;
     background:#101010;
     border:1px solid #2e2e2e;
     border-radius:14px;
@@ -188,6 +233,11 @@ h1{
     padding:12px 28px;
 }
 
+.whatsapp-btn {
+    width: 100%;
+    padding: 14px 20px;
+}
+
 }
 </style>
 </head>
@@ -203,7 +253,7 @@ h1{
 <div class="logo">🚀 CSSEVENT</div>
 
 <div class="tagline">
-Code. Compile. Conque
+Code. Compile. Win.
 </div>
 
 </div>
@@ -236,6 +286,26 @@ ${eventName}
 ✅ ACCEPTED
 </div>
 
+${qrCodeUrl ? `
+<div class="event-box" style="margin-top:24px; padding:24px; text-align:center;">
+    <div class="event-title">Check-in QR Code</div>
+    <img src="${qrCodeUrl}" alt="Check-in QR Code" style="margin-top:16px; width:220px; height:220px; border-radius:12px; background:#fff; padding:8px;" />
+    <p style="margin-top:14px; color:#d6d6d6; font-size:14px; line-height:1.6;">Scan this QR code at the event check-in desk.</p>
+    <p style="margin-top:8px; color:#ffb000; font-size:13px; word-break:break-all;">ID: ${checkInId}</p>
+</div>
+` : ''}
+
+<!-- NEW WHATSAPP SECTION -->
+<div class="whatsapp-box">
+    <div class="whatsapp-title">Mandatory Action Required</div>
+    <p class="whatsapp-text">
+        It is strictly mandatory for all selected participants to join the official event WhatsApp group. All critical announcements, schedules, and further instructions will be exclusively communicated through this channel.
+    </p>
+    <a href="https://chat.whatsapp.com/LwTTzOyNadTLFM6bOiqT4x?s=cl&p=a&ilr=1" class="whatsapp-btn">
+        JOIN WHATSAPP GROUP
+    </a>
+</div>
+
 <div class="info-card">
 
 <h3>What's Next?</h3>
@@ -245,7 +315,7 @@ ${eventName}
 
 <li>Stay updated with all announcements regarding the event.</li>
 
-<li>Keep checking our offical website for update.</li>
+<li>Keep checking our official website for updates.</li>
 
 <li>Be ready to showcase your coding skills and creativity.</li>
 
@@ -263,7 +333,7 @@ We were impressed with your profile and are delighted to welcome you to <strong>
 
 <strong>CSSEVENT Team</strong><br><br>
 
-© 2026 CSSEVENT • Code. Compile. Conquer.
+© 2026 CSSEVENT • Code. Compile. Win.
 
 </div>
 
@@ -279,7 +349,7 @@ We were impressed with your profile and are delighted to welcome you to <strong>
         from: process.env.EMAIL,
         to: sendtoemail,
         subject: `Congratulations! You've been selected for ${eventName}`,
-        html: acceptanceEmailTemplateHTML(eventName),
+        html: acceptanceEmailTemplateHTML(eventName, qrCodeUrl, checkInId),
     };
 
     // Convert sendMail to return a promise

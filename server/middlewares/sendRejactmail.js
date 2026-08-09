@@ -3,11 +3,13 @@ import util from 'util'
 
 const sendRejectionEmail = async (sendtoemail, eventName) => {
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.hostinger.com",
+        port: 465,
+        secure: true, // true for port 465
         auth: {
-            user: process.env.EMAIL,      // Your email
-            pass: process.env.PASSWORD    // App password (not your real password)
-        }
+            user: process.env.EMAIL,      
+            pass: process.env.PASSWORD,   
+        },
     });
 
     const rejectionEmailTemplateHTML = (eventName) => `

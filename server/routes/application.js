@@ -233,7 +233,6 @@ applicationRouter.put('/accept-application/:id', fetchuer, async (req, res) => {
             return res.status(404).json({ "msg": "Not found", status: false })
         }
         const update = await userApplication.findByIdAndUpdate(req.params.id, { $set: updateData }, { new: true })
-        const sendmail= await sendAcceptanceEmail(email,eventName)
         const userData= await User.findOne({email}).select("-password").lean();
         const newEventParticipant= new eventData({
             eventName:eventName,
@@ -246,6 +245,7 @@ applicationRouter.put('/accept-application/:id', fetchuer, async (req, res) => {
             applicationStatus:'accepted'
         }) 
         await newEventParticipant.save();
+        const sendmail= await sendAcceptanceEmail(email,eventName,newEventParticipant._id)
         
         return res.status(202).json({ "msg": "Accepted", status: true })
 
