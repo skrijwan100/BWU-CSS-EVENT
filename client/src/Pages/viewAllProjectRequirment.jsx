@@ -83,6 +83,15 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString('en-US', options);
 };
 
+const isApplicationClosed = (dateString) => {
+  if (!dateString) return false;
+  const deadline = new Date(dateString);
+  if (Number.isNaN(deadline.getTime())) return false;
+
+  deadline.setHours(23, 59, 59, 999);
+  return deadline < new Date();
+};
+
 // Skeleton Loader Component
 const SkeletonCard = () => (
   <div className="card">
@@ -342,8 +351,12 @@ export default function ViewAllProjectRequirment() {
                         </div>
                       </div>
 
-                      <button className="card-btn" onClick={() => handleViewDetails(project)}>
-                        APPLY NOW 
+                      <button
+                        className="card-btn"
+                        disabled={isApplicationClosed(project.lastDateOfApply)}
+                        onClick={() => handleViewDetails(project)}
+                      >
+                        {isApplicationClosed(project.lastDateOfApply) ? 'APPLICATION CLOSED' : 'APPLY NOW'}
                         <ChevronRight size={16} />
                       </button>
                     </div>
@@ -447,8 +460,16 @@ export default function ViewAllProjectRequirment() {
                   </div>
 
                   <div className="apply-footer">
-                    <button className="apply-btn" disabled={valueOfApply === 'Already applied'} onClick={handleOpenModal}>
-                      {isapplyloder ? <span className="loader-gg"></span> : valueOfApply}
+                    <button
+                      className="apply-btn"
+                      disabled={valueOfApply === 'Already applied' || isApplicationClosed(selectedProject.lastDateOfApply)}
+                      onClick={handleOpenModal}
+                    >
+                      {isapplyloder
+                        ? <span className="loader-gg"></span>
+                        : isApplicationClosed(selectedProject.lastDateOfApply)
+                          ? 'Application Closed'
+                          : valueOfApply}
                     </button>
                   </div>
                 </div>

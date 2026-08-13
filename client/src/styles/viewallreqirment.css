@@ -284,6 +284,19 @@ body {
   border-color: var(--primary);
 }
 
+.card-btn:disabled,
+.apply-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.card-btn:disabled:hover,
+.apply-btn:disabled:hover {
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  border-color: var(--border-input);
+}
+
 .card:hover .card-btn {
   border-color: rgba(255, 195, 0, 0.5);
 }
@@ -522,6 +535,12 @@ body {
 .apply-btn:hover {
   background-color: var(--primary);
   color: #000;
+}
+
+.apply-btn:disabled:hover {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
 .skeleton {
