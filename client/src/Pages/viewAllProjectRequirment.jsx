@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  ArrowLeft, ExternalLink, ChevronRight, Code2, 
-  Briefcase, Zap, Globe, X, Activity, 
+import {
+  ArrowLeft, ExternalLink, ChevronRight, Code2,
+  Briefcase, Zap, Globe, X, Activity,
   CalendarDays, Hourglass // <-- Added new icons for dates
 } from 'lucide-react';
 import '../styles/viewallreqirment.css';
@@ -9,6 +9,7 @@ import { handleError, handleSuccess } from '../Components/ErrorMessage';
 import secureLocalStorage from 'react-secure-storage';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router';
+import hackerrank from '../assets/hackerrank.png'
 
 // --- NORMAL CSS ---
 const customStyles = `
@@ -282,6 +283,17 @@ export default function ViewAllProjectRequirment() {
     }
   };
 
+  const hackerRankLinks = [
+    {
+      round1: '',
+      round2: '',
+    },
+    {
+      round1: 'https://www.hackerrank.com/coding-championship-5rd-semester-1st-round',
+      round2: 'https://www.hackerrank.com/coding-championship-5rd-semester-2nd-round',
+    }
+  ]
+
   return (
     <>
       <style>{customStyles}</style>
@@ -305,15 +317,19 @@ export default function ViewAllProjectRequirment() {
                     <SkeletonCard key={index} />
                   ))
                 ) : (
-                  projectData.map((project) => (
+                  projectData.map((project, projectIndex) => {
+                    // Each project uses the link object at the same array index.
+                    const projectHackerRankLinks = hackerRankLinks[projectIndex] ?? {};
+
+                    return (
                     <div key={project._id} className="card">
                       <div className="card-header">
                         <h3 className="card-title">{project.ProjectTitle}</h3>
-                        <a >  
+                        <a >
                           <div className="icon-box">
                             <svg fill="#ffffff" width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M11.987 1.091L2 6.85v10.3l9.987 5.759 9.986-5.759V6.85l-9.986-5.759zm5.541 12.392h-2.158v-2.585h-6.74v2.585H6.472v-6.966h2.158v2.247h6.74V6.517h2.158v6.966z" />
-</svg>
+                              <path d="M11.987 1.091L2 6.85v10.3l9.987 5.759 9.986-5.759V6.85l-9.986-5.759zm5.541 12.392h-2.158v-2.585h-6.74v2.585H6.472v-6.966h2.158v2.247h6.74V6.517h2.158v6.966z" />
+                            </svg>
 
                           </div>
                         </a>
@@ -324,7 +340,7 @@ export default function ViewAllProjectRequirment() {
                           <Globe size={16} /> Event Type
                         </p>
                         <p className="card-value">{project.ProjectType}</p>
-                        
+
                         {/* --- ADDED DATES IN LIST VIEW --- */}
                         <div className="date-info-row">
                           {project.projectDate && (
@@ -351,6 +367,20 @@ export default function ViewAllProjectRequirment() {
                         </div>
                       </div>
 
+                      <div className="round-buttons">
+                        {['round1', 'round2'].map((roundKey, roundIndex) => {
+                          const url = projectHackerRankLinks[roundKey];
+
+                          return url ? (
+                            <button key={roundKey} className="card-btn">
+                              <a href={url} target="_blank" rel="noopener noreferrer">
+                                Round {roundIndex + 1} <img src={hackerrank} alt="HackerRank" />
+                              </a>
+                            </button>
+                          ) : null;
+                        })}
+                      </div>
+
                       <button
                         className="card-btn"
                         disabled={isApplicationClosed(project.lastDateOfApply)}
@@ -360,7 +390,8 @@ export default function ViewAllProjectRequirment() {
                         <ChevronRight size={16} />
                       </button>
                     </div>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </div>
@@ -448,12 +479,12 @@ export default function ViewAllProjectRequirment() {
 
                       <div className="sidebar-divider">
                         <h3 className="sidebar-heading">
-                          <Code2 size={16} /> Platform 
+                          <Code2 size={16} /> Platform
                         </h3>
                         <div className="tags-flex">
-                            <span className="tech-tag">
-                              HackerRank
-                            </span>
+                          <span className="tech-tag">
+                            HackerRank
+                          </span>
                         </div>
                       </div>
                     </div>

@@ -2575,3 +2575,24 @@
         transform: rotate(360deg);
     }
 }
+
+.round-buttons{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.round-buttons button a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.round-buttons button a img{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
