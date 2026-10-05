@@ -1,0 +1,618 @@
+/* ==========================================================
+   EventPass.css  -  all styles for the EventPass page
+   Every class starts with "ep-" so it cannot clash with
+   other CSS in your project.
+   ========================================================== */
+
+:root {
+    --ep-gold: #ffc400;
+    --ep-amber: #ffb300;
+    --ep-orange: #ff8a00;
+    --ep-gold-deep: #e59a00;
+    --ep-gold-light: #ffe27a;
+    --ep-grey: #9ca3af;
+}
+
+.ep-page *,
+.ep-pass * {
+    box-sizing: border-box;
+    margin: 0;
+
+}
+
+/* ---------------------------------------------------------
+   PAGE + FORM CARD
+   --------------------------------------------------------- */
+.ep-page {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 16px;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    font-family: 'Rajdhani', 'Segoe UI', system-ui, sans-serif;
+}
+
+.ep-page-glow {
+    position: absolute;
+    left: 50%;
+    top: 33%;
+    width: 420px;
+    height: 420px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(255, 179, 0, 0.1);
+    filter: blur(64px);
+    pointer-events: none;
+}
+
+.ep-card {
+    position: relative;
+    width: 100%;
+    max-width: 448px;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 196, 0, 0.25);
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 0 40px rgba(255, 179, 0, 0.08);
+}
+
+.ep-card-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ep-gold);
+}
+
+.ep-card-text {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--ep-grey);
+}
+
+.ep-input {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 196, 0, 0.3);
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.ep-input::placeholder {
+    color: #6b7280;
+}
+.ep-input:focus {
+    border-color: var(--ep-gold);
+    box-shadow: 0 0 0 1px var(--ep-gold);
+}
+
+/* ---------------------------------------------------------
+   BUTTONS + SPINNER
+   --------------------------------------------------------- */
+.ep-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, var(--ep-gold), var(--ep-orange));
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: filter 0.2s, background 0.2s;
+}
+.ep-btn:hover {
+    filter: brightness(1.1);
+}
+.ep-btn:focus-visible {
+    outline: 2px solid var(--ep-gold);
+    outline-offset: 2px;
+}
+.ep-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.ep-btn-full {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.ep-btn-outline {
+    border: 1px solid rgba(255, 196, 0, 0.4);
+    background: transparent;
+    color: var(--ep-gold);
+}
+.ep-btn-outline:hover {
+    background: rgba(255, 196, 0, 0.1);
+    filter: none;
+}
+
+.ep-spinner {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-top-color: #000;
+    animation: ep-spin 0.8s linear infinite;
+}
+@keyframes ep-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------------------------------------------------------
+   PASS PREVIEW OVERLAY
+   --------------------------------------------------------- */
+.ep-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(4px);
+}
+
+.ep-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* ---------------------------------------------------------
+   THE PASS  (fixed 1000 x 563 canvas, scaled by JS)
+   --------------------------------------------------------- */
+.ep-pass {
+    position: relative;
+    width: 1000px;
+    height: 563px;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    font-family: 'Rajdhani', 'Segoe UI', system-ui, sans-serif;
+}
+
+.ep-glow {
+    position: absolute;
+    left: 420px;
+    top: 40px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: rgba(255, 196, 0, 0.1);
+    filter: blur(64px);
+}
+
+.ep-ticket-border {
+    position: absolute;
+    left: 29px;
+    right: 29px;
+    top: 32px;
+    bottom: 32px;
+    border-radius: 26px;
+    border: 2px solid rgba(255, 196, 0, 0.9);
+}
+
+.ep-perforation {
+    position: absolute;
+    left: 722px;
+    top: 32px;
+    bottom: 32px;
+    border-left: 2px dashed var(--ep-gold);
+}
+
+.ep-notch {
+    position: absolute;
+    left: 698px;
+    width: 48px;
+    height: 24px;
+    overflow: hidden;
+}
+.ep-notch-top {
+    top: 32px;
+}
+.ep-notch-bottom {
+    top: 507px;
+}
+.ep-notch-circle {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--ep-gold);
+    background: #000;
+}
+.ep-notch-top .ep-notch-circle {
+    top: -24px;
+}
+.ep-notch-bottom .ep-notch-circle {
+    top: 0;
+}
+
+/* ---------- left: header ---------- */
+.ep-logo {
+    position: absolute;
+    left: 72px;
+    top: 50px;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    border: 4px solid var(--ep-gold);
+    object-fit: cover;
+}
+
+.ep-uni {
+    position: absolute;
+    left: 205px;
+    top: 56px;
+}
+.ep-uni-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 27px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+.ep-dept {
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.025em;
+    color: var(--ep-gold);
+}
+.ep-uni-line {
+    width: 200px;
+    height: 1px;
+    margin-top: 14px;
+    background: linear-gradient(to right, var(--ep-gold), transparent);
+}
+.ep-presents {
+    margin-top: 10px;
+    padding-left: 44px;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    color: var(--ep-grey);
+}
+
+/* ---------- left: title ---------- */
+.ep-title {
+    position: absolute;
+    left: 99px;
+    top: 168px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 466px;
+}
+
+.ep-silver-text,
+.ep-gold-grad-text {
+    font-weight: 900;
+    font-style: italic;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+.ep-silver-text {
+    background-image: linear-gradient(to bottom, #fff, #9ca3af);
+}
+.ep-gold-grad-text {
+    background-image: linear-gradient(to bottom, var(--ep-gold-light), var(--ep-gold-deep));
+}
+
+.ep-title-coding {
+    font-size: 58px;
+    padding: 7px;
+    line-height: 0.60;
+    letter-spacing: -0.025em;
+}
+.ep-title-champ {
+    font-size: 58px;
+    padding: 10px;
+    line-height: 0.60;
+    letter-spacing: -0.025em;
+}
+.ep-title-year {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 2px;
+    font-size: 40px;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1;
+    color: #e5e7eb;
+}
+.ep-chev {
+    color: var(--ep-gold-deep);
+}
+.ep-tagline {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+.ep-gold-text {
+    color: var(--ep-gold);
+}
+
+/* ---------- left: orb ---------- */
+.ep-orb-ring {
+    position: absolute;
+    border-radius: 50%;
+}
+.ep-orb-ring-1 {
+    left: 585px;
+    top: 84px;
+    width: 170px;
+    height: 170px;
+    border: 1px solid rgba(255, 196, 0, 0.2);
+}
+.ep-orb-ring-2 {
+    left: 600px;
+    top: 99px;
+    width: 140px;
+    height: 140px;
+    border: 1px solid rgba(255, 196, 0, 0.3);
+}
+.ep-orb {
+    position: absolute;
+    left: 620px;
+    top: 119px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--ep-gold-light), var(--ep-gold-deep) 55%, #8a5200);
+    box-shadow: 0 0 40px rgba(255, 196, 0, 0.45);
+}
+.ep-orb-text {
+    font-size: 30px;
+    font-weight: 700;
+    color: #8a5200;
+}
+
+/* ---------- left: student panel ---------- */
+.ep-panel {
+    position: absolute;
+    left: 65px;
+    top: 336px;
+    width: 640px;
+    height: 122px;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 196, 0, 0.6);
+    background: rgba(0, 0, 0, 0.6);
+}
+.ep-building {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 230px;
+    height: 70px;
+    opacity: 0.3;
+}
+.ep-photo {
+    position: absolute;
+    left: 13px;
+    top: 11px;
+    width: 88px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 2px solid var(--ep-gold);
+    background: #1a1a1a;
+}
+.ep-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ep-avatar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.ep-avatar-body {
+    width: 62px;
+    height: 62px;
+    border-radius: 31px 31px 0 0;
+    background: #6b7280;
+}
+
+.ep-student-info {
+    position: absolute;
+    left: 125px;
+    top: 10px;
+}
+.ep-label {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.25em;
+    color: var(--ep-grey);
+}
+.ep-label-spaced {
+    margin-top: 8px;
+}
+.ep-student-name {
+    margin-top: 5px;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    color: var(--ep-gold);
+}
+.ep-student-line {
+    width: 400px;
+    height: 1px;
+    margin-top: 8px;
+    background: rgba(255, 196, 0, 0.3);
+}
+.ep-student-code {
+    margin-top: 5px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.025em;
+}
+.ep-badge {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--ep-gold);
+    background: rgba(255, 196, 0, 0.15);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--ep-gold);
+}
+
+/* ---------- left: bottom info row ---------- */
+.ep-info-row {
+    position: absolute;
+    left: 78px;
+    top: 470px;
+    display: flex;
+    align-items: center;
+}
+.ep-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.ep-icon {
+    width: 28px;
+    height: 28px;
+}
+.ep-info-label {
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.2em;
+    color: var(--ep-grey);
+}
+.ep-info-value {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+}
+.ep-info-sep {
+    width: 1px;
+    height: 36px;
+    margin: 0 22px;
+    background: rgba(255, 196, 0, 0.4);
+}
+
+/* ---------- right side (tear-off stub) ---------- */
+.ep-pass-tag {
+    position: absolute;
+    left: 748px;
+    right: 29px;
+    top: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    border-radius: 6px 0 0 6px;
+    background: linear-gradient(to right, var(--ep-gold), var(--ep-amber));
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #000;
+}
+
+.ep-qr-box {
+    position: absolute;
+    left: 748px;
+    top: 127px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 206px;
+    height: 215px;
+    border-radius: 16px;
+    background: #fff;
+}
+.ep-qr-caption {
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #6b7280;
+}
+
+.ep-right-line {
+    position: absolute;
+    left: 748px;
+    top: 360px;
+    width: 206px;
+    height: 1px;
+    background: rgba(255, 196, 0, 0.7);
+}
+
+.ep-mini {
+    position: absolute;
+    left: 748px;
+    top: 378px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 206px;
+}
+.ep-mini-coding,
+.ep-mini-champ {
+    padding: 5px;
+    font-size: 26px;
+    line-height: 0.60;
+    letter-spacing: -0.025em;
+}
+.ep-mini-champ {
+    letter-spacing: -0.025em;
+}
+.ep-mini-year {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3px;
+    font-size: 18px;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1;
+    color: #e5e7eb;
+}
+.ep-mini-tagline {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}

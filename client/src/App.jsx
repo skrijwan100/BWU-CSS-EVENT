@@ -28,6 +28,7 @@ import AccountSetting from './Pages/AccountSetting';
 import Leaderboard from './Pages/Leaderboard';
 import EventDetails from './Pages/AboutEvent';
 import ScoreManager from './Pages/ScoreManager';
+import EventPass from './Pages/EventPass';
 
 function App() {
   const { user } = useAuth()
@@ -103,6 +104,7 @@ function App() {
           <Route path='/post' element={<Post/>}/>
           <Route path='/about' element={<EventDetails/>}/>
           <Route path='/leaderbord' element={<Leaderboard/>}/>
+          <Route path='/eventpass' element={<EventPass/>}/>
           <Route path='/accountsettings' element={<AccountSetting setUpdate={setUpdate}/>}/>
           <Route path='/post/hackthon' element={<PostHackthon/>}/>
           <Route path='/post/project' element={<PostProject/>}/>
