@@ -315,6 +315,8 @@ const getStatusConfig = (status) => {
   }
 };
 
+//did not find the work
+
 export default function UserApplication() {
   const { user } = useAuth();
   const [applications, setApplications] = useState([]);
