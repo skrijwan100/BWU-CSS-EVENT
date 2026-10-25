@@ -13,7 +13,6 @@ import {
   CalendarDays 
 } from 'lucide-react';
 
-// --- NORMAL CSS ---
 const customStyles = `
   :root {
     --bg-main: #0a0a0a;
