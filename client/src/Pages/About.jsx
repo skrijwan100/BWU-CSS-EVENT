@@ -8,7 +8,7 @@ const topics = [
     bg: "rgba(97,218,251,0.12)",
     border: "rgba(97,218,251,0.25)",
     iconColor: "#61DAFB",
-    icon: <Brackets color="#61DAFB" size={34} strokeWidth={1.5} />,
+    icon: <Brackets color="#61DAFB" size={34} strokeWidth={1.5} />
   },
   {
     name: "Mathematics",
