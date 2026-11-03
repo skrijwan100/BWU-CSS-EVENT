@@ -9,8 +9,8 @@ const PASS_W = 1000
 const PASS_H = 563
 
 const EVENT_DATES = {
-    'Coding Championship 2026 (3rd Semester)': '27 November 2026',
-    'Coding Championship 2026 (5th Semester)': '28 November 2026',
+    'Coding Championship 2026 (3rd Semester)': '6 November 2026',
+    'Coding Championship 2026 (5th Semester)': '6 November 2026',
 }
 
 /* ---------- small icons ---------- */
