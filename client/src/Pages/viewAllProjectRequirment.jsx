@@ -289,8 +289,8 @@ export default function ViewAllProjectRequirment() {
       round2: 'https://www.hackerrank.com/coding-championship-3rd-semester-final-round-2',
     },
     {
-      round1: 'https://www.hackerrank.com/coding-championship-5th-semester-1st-round-1790313350',
-      round2: 'https://www.hackerrank.com/coding-championship-5th-semester-2nd-round-1790350937',
+      round1: 'https://www.hackerrank.com/coding-championship-5th-semester-final-round-1',
+      round2: 'https://www.hackerrank.com/coding-championship-5th-semester-final-round-2',
     }
   ]
 
